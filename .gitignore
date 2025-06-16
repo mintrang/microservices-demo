@@ -1,0 +1,21 @@
+# Ignore all node_modules in every subfolder
+**/node_modules/
+
+# Ignore .env files in all services
+**/.env
+
+# Logs
+**/*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.sw?
