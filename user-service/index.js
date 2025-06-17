@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/users', router)
+app.use('/api/v1/users', router)
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.listen(4000, ()=> {

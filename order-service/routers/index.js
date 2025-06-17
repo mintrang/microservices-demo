@@ -5,7 +5,7 @@ const { getOrder, createOrder } = require('@/controllers/order')
 
 /**
  * @swagger
- * /api/orders:
+ * /api/v1/orders:
  *   get:
  *     summary: List
  *     tags: [Orders]

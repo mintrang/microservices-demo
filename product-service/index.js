@@ -17,7 +17,7 @@ connectDB()
 app.use(cors())
 app.use(morgan('dev'))
 
-app.use('/api/products',router)
+app.use('/api/v1/products',router)
 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));

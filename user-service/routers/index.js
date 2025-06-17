@@ -4,7 +4,7 @@ const { getUser, createUser } = require('@/controllers/user');
 
 /**
  * @swagger
- * /api/users:
+ * /api/v1/users:
  *   get:
  *     summary: Lấy danh sách người dùng
  *     tags: [Users]

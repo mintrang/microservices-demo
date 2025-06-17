@@ -19,11 +19,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/users', createProxyMiddleware({
+app.use('/api/v1/users', createProxyMiddleware({
   target: process.env.USER_SERVICE_URL || 'http://localhost:4000',
   changeOrigin: true,
   pathRewrite: {
-    '^/api/users': '/api/users'
+    '^/api/v1/users': '/api/v1/users'
   },
   onProxyReq: (proxyReq, req, res) => {
     console.log(`[Gateway] FORWARD: ${req.method} ${req.originalUrl} → ${process.env.USER_SERVICE_URL || 'http://localhost:4000'}/api/users`);
@@ -36,16 +36,20 @@ app.use('/api/users', createProxyMiddleware({
 
 
 
-app.use('/api/products', createProxyMiddleware({
-  target: process.env.PRODUCT_SERVICE_URL,
+app.use('/api/v1/orders', createProxyMiddleware({
+  target: process.env.ORDER_SERVICE_URL || 'http://localhost:4002',
   changeOrigin: true,
-}))
-
-app.use('/api/orders', createProxyMiddleware({
-  target: process.env.ORDER_SERVICE_URL,
-  changeOrigin: true,
-}))
-
+  pathRewrite: {
+    '^/api/v1/users': '/api/v1/users'
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    console.log(`[Gateway] FORWARD: ${req.method} ${req.originalUrl} → ${process.env.USER_SERVICE_URL || 'http://localhost:4002'}/api/users`);
+  },
+  onError: (err, req, res) => {
+    console.error('❌ Proxy error:', err.message);
+    res.status(500).send('Gateway proxy error');
+  }
+}));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.listen(3000, () => {

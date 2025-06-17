@@ -19,7 +19,7 @@ router.route('/')
 
 /**
  * @swagger
- * /api/products:
+ * /api/v1/products:
  *   post:
  *     summary: Tạo product mới
  *     tags: [Users]
